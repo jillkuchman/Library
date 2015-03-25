@@ -178,6 +178,50 @@
             $this->assertEquals($new_title, $result);
         }
 
+        function test_getAuthors()
+        {
+            //Arrange
+            $title = "How to Water Your Succulents on Venus";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $name1 = "John Franti";
+            $test_author1 = new Author($name1);
+            $test_author1->save();
+
+            $name2 = "David Bowie";
+            $test_author2 = new Author($name2);
+            $test_author2->save();
+
+            //Act
+            $test_book->addAuthor($test_author1);
+            $test_book->addAuthor($test_author2);
+
+            //Assert
+            $result = $test_book->getAuthors();
+            $this->assertEquals([$test_author1, $test_author2], $result);
+        }
+
+        function test_addAuthor()
+        {
+            //Arrange
+            $title = "How to Water Your Succulents on Venus";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $name1 = "John Franti";
+            $test_author1 = new Author($name1);
+            $test_author1->save();
+
+            //Act
+            $test_book->addAuthor($test_author1);
+
+            //Assert
+            $result = $test_book->getAuthors();
+            $this->assertEquals([$test_author1], $result);
+
+        }
+
     }
 
 
