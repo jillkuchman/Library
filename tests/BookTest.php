@@ -221,7 +221,6 @@
             $this->assertEquals([$test_author1], $result);
 
         }
-
     }
 
 

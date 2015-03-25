@@ -16,42 +16,42 @@
             Copy::deleteAll();
         }
 
-        function test_getCatNumber()
+        function test_getBooksId()
         {
             //Arrange
-            $cat_number = 1;
+            $books_id = 1;
             $id = 3;
-            $test_copy = new Copy($cat_number, $id);
+            $test_copy = new Copy($books_id, $id);
 
             //Act
-            $result = $test_copy->getCatNumber();
+            $result = $test_copy->getBooksId();
 
             //Assert
-            $this->assertEquals($cat_number, $result);
+            $this->assertEquals($books_id, $result);
         }
 
-        function test_setCatNumber()
+        function test_setBooksId()
         {
             //Arrange
-            $cat_number = 1;
+            $books_id = 1;
             $id = 3;
-            $test_copy = new Copy($cat_number, $id);
-            $new_cat_number = 2;
+            $test_copy = new Copy($books_id, $id);
+            $new_books_id = 2;
 
             //Act
-            $test_copy->setCatNumber($new_cat_number);
+            $test_copy->setBooksId($new_books_id);
 
             //Assert
-            $result = $test_copy->getCatNumber();
-            $this->assertEquals($new_cat_number, $result);
+            $result = $test_copy->getBooksId();
+            $this->assertEquals($new_books_id, $result);
         }
 
         function test_getId()
         {
             //Arrange
-            $cat_number = 1;
+            $books_id = 1;
             $id = 4;
-            $test_copy = new Copy($cat_number, $id);
+            $test_copy = new Copy($books_id, $id);
 
             //Act
             $result = $test_copy->getId();
@@ -63,9 +63,9 @@
         function test_setId()
         {
             //Arrange
-            $cat_number = 1;
+            $books_id = 1;
             $id = null;
-            $test_copy = new Copy($cat_number, $id);
+            $test_copy = new Copy($books_id, $id);
 
             //Act
             $test_copy->setId(5);
@@ -78,8 +78,8 @@
         function test_save()
         {
             //Arrange
-            $cat_number = 1;
-            $test_copy = new Copy($cat_number);
+            $books_id = 1;
+            $test_copy = new Copy($books_id);
             $test_copy->save();
 
             //Act
@@ -92,10 +92,10 @@
         function test_getAll()
         {
             //Arrange
-            $cat_number = 1;
-            $cat_number2 = 2;
-            $test_copy = new Copy($cat_number);
-            $test_copy2 = new Copy($cat_number2);
+            $books_id = 1;
+            $books_id2 = 2;
+            $test_copy = new Copy($books_id);
+            $test_copy2 = new Copy($books_id2);
             $test_copy->save();
             $test_copy2->save();
 
@@ -109,10 +109,10 @@
         function test_deleteAll()
         {
             //Arrange
-            $cat_number = 1;
-            $cat_number2 = 2;
-            $test_copy = new Copy($cat_number);
-            $test_copy2 = new Copy($cat_number2);
+            $books_id = 1;
+            $books_id2 = 2;
+            $test_copy = new Copy($books_id);
+            $test_copy2 = new Copy($books_id2);
             $test_copy->save();
             $test_copy2->save();
 
@@ -126,26 +126,26 @@
 
         function test_update()
         {
-            $cat_number = 1;
-            $test_copy = new Copy($cat_number);
+            $books_id = 1;
+            $test_copy = new Copy($books_id);
             $test_copy->save();
-            $new_cat_number = 2;
+            $new_books_id = 2;
 
             //Act
-            $test_copy->update($new_cat_number);
+            $test_copy->update($new_books_id);
 
             //Assert
-            $result = $test_copy->getCatNumber();
-            $this->assertEquals($new_cat_number, $result);
+            $result = $test_copy->getBooksId();
+            $this->assertEquals($new_books_id, $result);
         }
 
         function test_delete()
         {
             //Arrange
-            $cat_number = 1;
-            $cat_number2 = 2;
-            $test_copy = new Copy($cat_number);
-            $test_copy2 = new Copy($cat_number2);
+            $books_id = 1;
+            $books_id2 = 2;
+            $test_copy = new Copy($books_id);
+            $test_copy2 = new Copy($books_id2);
             $test_copy->save();
             $test_copy2->save();
 
@@ -156,48 +156,6 @@
             $result = Copy::getAll();
             $this->assertEquals([$test_copy2], $result);
 
-        }
-
-        function test_getBook()
-        {
-            //Arrange
-            $cat_number = 1;
-            $test_copy = new Copy($cat_number);
-            $test_copy->save();
-
-            $title = "How to Water Your Ficus on Mars";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            $title2 = "Whoops, Im on Mars";
-            $test_book2 = new Book($title2);
-            $test_book2->save();
-
-            //Act
-            $test_copy->addBook($test_book);
-
-            //Assert
-            $result = $test_copy->getBook();
-            $this->assertEquals([$test_book], $result);
-        }
-
-        function test_addBook()
-        {
-            //Arrange
-            $cat_number = 1;
-            $test_copy = new Copy($cat_number);
-            $test_copy->save();
-
-            $title = "How to Water Your Ficus on Mars";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            //Act
-            $test_copy->addBook($test_book);
-
-            //Assert
-            $result = $test_copy->getBook();
-            $this->assertEquals([$test_book], $result);
         }
     }
 ?>

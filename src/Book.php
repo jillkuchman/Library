@@ -102,5 +102,21 @@ class Book
         {
             $GLOBALS['DB']->exec("INSERT INTO authors_books (authors_id, books_id) VALUES ({$author->getId()}, {$this->getId()});");
         }
+
+        function getCopies()
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM copies WHERE books_id = {$this->getId()};");
+            $copies = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $returned_copies = array();
+            foreach($copies as $copy){
+                $book_id = $copy['books_id'];
+                $id = $copy['id'];
+                $new_copy = new Copy($book_id, $id);
+                array_push($returned_copies, $copy);
+            }
+            return $returned_copies;
+        }
+
     }
 ?>

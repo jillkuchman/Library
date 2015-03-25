@@ -2,23 +2,23 @@
 
     class Copy
     {
-        private $cat_number;
+        private $books_id;
         private $id;
 
-        function __construct($cat_number, $id = null)
+        function __construct($books_id, $id = null)
         {
-            $this->cat_number = $cat_number;
+            $this->books_id = $books_id;
             $this->id = $id;
         }
 
-        function setCatNumber($new_cat_number)
+        function setBooksId($new_books_id)
         {
-            $this->cat_number = (int) $new_cat_number;
+            $this->books_id = (int) $new_books_id;
         }
 
-        function getCatNumber()
+        function getBooksId()
         {
-            return $this->cat_number;
+            return $this->books_id;
         }
 
         function setId($new_id)
@@ -33,7 +33,7 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO copies (cat_number) VALUES ('{$this->getCatNumber()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO copies (books_id) VALUES ('{$this->getBooksId()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
@@ -43,9 +43,9 @@
             $all_copies = $GLOBALS['DB']->query("SELECT * FROM copies;");
             $returned_copies = array();
             foreach ($all_copies as $copy){
-                $cat_number = $copy['cat_number'];
+                $books_id = $copy['books_id'];
                 $id = $copy['id'];
-                $new_copy = new Copy($cat_number, $id);
+                $new_copy = new Copy($books_id, $id);
                 array_push ($returned_copies, $new_copy);
             }
             return $returned_copies;
@@ -56,37 +56,15 @@
             $GLOBALS['DB']->exec("DELETE FROM copies *;");
         }
 
-        function update($new_cat_number)
+        function update($new_books_id)
         {
-            $GLOBALS['DB']->exec("UPDATE copies SET cat_number = '{$new_cat_number}' WHERE id = {$this->getId()};");
-            $this->setCatNumber($new_cat_number);
+            $GLOBALS['DB']->exec("UPDATE copies SET books_id = '{$new_books_id}' WHERE id = {$this->getId()};");
+            $this->setBooksId($new_books_id);
         }
 
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = ({$this->getId()});");
-        }
-
-        function getBook()
-        {
-            $statement = $GLOBALS['DB']->query("SELECT books.* FROM copies
-                                            JOIN books_copies ON (copies.id = books_copies.copies_id)
-                                            JOIN books ON (books_copies.books_id = books.id)
-                                        WHERE copies.id = {$this->getId()};");
-            $book_id = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $books = array();
-            foreach($book_id as $book){
-                $title = $book['title'];
-                $id = $book['id'];
-                $new_book = new Book($title, $id);
-                array_push($books, $new_book);
-            }
-            return $books;
-        }
-
-        function addBook($book)
-        {
-            $GLOBALS['DB']->exec("INSERT INTO books_copies (copies_id, books_id) VALUES ({$this->getId()}, {$book->getId()});");
         }
     }
 ?>
