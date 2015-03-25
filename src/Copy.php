@@ -67,7 +67,7 @@
             $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = ({$this->getId()});");
         }
 
-        function getBooks()
+        function getBook()
         {
             $statement = $GLOBALS['DB']->query("SELECT books.* FROM copies
                                             JOIN books_copies ON (copies.id = books_copies.copies_id)
@@ -88,8 +88,5 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO books_copies (copies_id, books_id) VALUES ({$this->getId()}, {$book->getId()});");
         }
-
     }
-
-
 ?>
