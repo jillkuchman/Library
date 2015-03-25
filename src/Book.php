@@ -79,11 +79,5 @@ class Book
         $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
         $this->setTitle($new_title);
     }
-
-
-
 }
-
-
-
 ?>
