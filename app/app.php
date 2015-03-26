@@ -70,6 +70,21 @@
         return $app['twig']->render('book.html.twig', array('book' => $current_book, 'authors' => $current_book->getAuthors(), 'all_authors' => Author::getAll()));
     });
 
+    $app->post("/add_authors", function() use ($app) {
+        $current_book = Book::find($_POST['book_id']);
+        $author = Author::find($_POST['author_id']);
+        $current_book->addAuthor($author);
+        return $app['twig']->render('book.html.twig', array('book' => $current_book, 'authors' => $current_book->getAuthors(), 'all_authors' => Author::getAll()));
+    });
+
+    $app->delete("/delete_books", function() use($app) {
+        $current_author = Author::find($_POST['author_id']);
+        $book = Book::find($_POST['book_id']);
+        $current_author->deleteBook($book);
+        return $app['twig']->render('author.html.twig', array('author' => $current_author, 'books' => $current_author->getBooks(), 'all_books' => Book::getAll()));
+    });
+
+
     $app->delete("/books/{id}/delete", function($id) use ($app) {
         $current_book = Book::find($id);
         $current_book->delete();
@@ -112,6 +127,13 @@
         return $app['twig']->render('author.html.twig', array('author' => $current_author, 'books' => $current_author->getBooks(), 'all_books' => Book::getAll()));
     });
 
+    $app->delete("/delete_books", function() use($app) {
+        $current_author = Author::find($_POST['author_id']);
+        $book = Book::find($_POST['book_id']);
+        $current_author->deleteBook($book);
+        return $app['twig']->render('author.html.twig', array('author' => $current_author, 'books' => $current_author->getBooks(), 'all_books' => Book::getAll()));
+    });
+
     $app->patch("/authors/{id}", function($id) use($app){
         $current_author = Author::find($id);
         $new_name = $_POST['new_name'];
@@ -124,6 +146,7 @@
         $current_author->delete();
         return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
     });
+
 
     return $app;
 

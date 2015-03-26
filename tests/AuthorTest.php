@@ -200,5 +200,31 @@
             $result = $test_author->getBooks();
             $this->assertEquals([$test_book], $result);
         }
+
+        function test_deleteBook()
+        {
+            //Arrange
+            $name = "Jill Kuchman";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $title = "How to Water Your Ficus on Mars";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "Whoops, Im on Mars";
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+            //Act
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
+            $test_author->deleteBook($test_book);
+
+            //Assert
+            $result = $test_author->getBooks();
+            $this->assertEquals([$test_book2], $result);
+        }
+
     }
 ?>

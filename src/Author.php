@@ -101,6 +101,12 @@
             $GLOBALS['DB']->exec("INSERT INTO authors_books (authors_id, books_id) VALUES ({$this->getId()}, {$book->getId()});");
         }
 
+        function deleteBook($book)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE (authors_id, books_id) = ({$this->getId()}, {$book->getId()});");
+        }
+
+
     }
 
 

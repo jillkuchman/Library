@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Springfield Library</h1>
+        <h4>Springfield Library</h4>
 
         <form action="/books" method="post">
             <label for="title">Add a Book:</label>
@@ -15,7 +15,9 @@
             <button type="submit">Add</button>
         </form>
 
-        <a href="/admin">Back</a>
+        <form action="/admin">
+            <button type="submit" class="btn btn-info">Back</button>
+        </form>
 
         <h2>Book Catalog:</h2>
         {% if books is not empty %}

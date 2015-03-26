@@ -1,17 +1,52 @@
 <html>
 <head>
-    <title>Springfield Library</title>
+    <title>{{ book.getTitle }}</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Springfield Library!</h1>
+        <h4>Springfield Library</h4>
+
+        <h3>{{ book.getTitle }}</h3>
+        <form action="/books/{{ book.getId }}/edit">
+            <button type="submit" class="btn btn-warning">Edit this book</button>
+        </form>
+
+        <br>
+
+        <form action="/add_authors" method="post">
+                <label for="author_id">Select an author</label>
+                <input value="{{ book.getId }}" id="book_id" name="book_id" type="hidden">
+                <select id="author_id" name="author_id" type="text">
+                    {% for author in all_authors %}
+                        <option value="{{ author.getId }}"> {{ author.getName }} </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Add Author</button>
+            </form>
+
+        <p>Author(s) of this book:</p>
+        {% if authors is not empty %}
+        <ol>
+            {% for author in authors|sort %}
+            <li><a href="/authors/{{ author.getId }}">{{ author.getName }}</a></li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p>There are no listed authors for this book.</p>
+        {% endif %}
+
+
+        <form action="/books">
+            <button type="submit" class="btn btn-info">Back to catalog</button>
+        </form>
+        <br>
+
+        <form action="/books/{{ book.getId }}/delete" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit" class="btn btn-danger">Remove Book from Catalog</button>
+        </form>
+
     </div>
-
-
-
-
-
-
 </body>
 </html>

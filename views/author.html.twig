@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Springfield Library</h1>
+        <h4>Springfield Library</h4>
 
         <h3>{{ author.getName }}</h3>
         <form action="/authors/{{ author.getId }}/edit">
@@ -29,7 +29,13 @@
         {% if books is not empty %}
         <ol>
             {% for book in books|sort %}
-            <li><a href="/books/{{ book.getId }}">{{ book.getTitle }}</a></li>
+            <li><a href="/books/{{ book.getId }}">{{ book.getTitle }}</a>
+                <form action="/delete_books" method="post">
+                        <input name="_method" type="hidden" value="delete">
+                        <input value="{{ author.getId }}" id="author_id" name="author_id" type="hidden">
+                        <input value="{{ book.getId }}" id="book_id" name="book_id" type="hidden">
+                        <button type="submit" class="btn btn-danger btn-xs">Remove Book from Author</button>
+                    </form></li>
             {% endfor %}
         </ol>
         {% else %}
