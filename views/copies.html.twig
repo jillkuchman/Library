@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Copies of {{ book.getTitle }}</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+    <div class="container">
+        <h4>Springfield Library</h4>
+        <form action="/admin">
+            <button type="submit" class="btn btn-info">Back</button>
+        </form>
+
+
+        <h3>Copies of {{ book.getTitle }}</h3>
+
+        <form action="/add_copy" method="post">
+            <input value="{{ book.getId }}" id="book_id" name="book_id" type="hidden">
+            <button type="submit" class="btn btn-info">Add 1 Copy to the Catalog</button>
+        </form>
+        <br>
+
+
+
+        <h2>Current Copies:</h2>
+        {% if copies is not empty %}
+        <ol>
+            {% for copy in copies|sort %}
+            <li><a href="/books/{{ book.getId }}">{{ book.getTitle }}</a>
+                <form action="/delete_copies" method="post">
+                        <input name="_method" type="hidden" value="delete">
+                        <input value="{{ book.getId }}" id="book_id" name="book_id" type="hidden">
+                        <button type="submit" class="btn btn-danger btn-xs">delete</button>
+                    </form></li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p>There are no Copies</p>
+        {% endif %}
+
+
+    </div>
+</body>
+</html>
