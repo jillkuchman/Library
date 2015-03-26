@@ -175,7 +175,6 @@
 
             //Act
             $new_copy->addPatron($new_patron);
-            var_dump($new_copy);
             $new_copy->addPatron($new_patron2);
 
             //Assert
