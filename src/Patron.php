@@ -79,5 +79,27 @@
             $GLOBALS['DB']->exec("DELETE FROM patrons WHERE id = ({$this->getId()});");
         }
 
+        function getCopies()
+        {
+            $statement = $GLOBALS['DB']->query("SELECT copies.* FROM patrons
+                                            JOIN checkouts ON (patrons.id = checkouts.patrons_id)
+                                            JOIN copies ON  (checkouts.copies_id = copies.id)
+                                            WHERE patrons.id = {$this->getId()};");
+            $all_copies = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $copies = array();
+            foreach($all_copies as $copy){
+                $id = $copy['id'];
+                $books_id = $copy['books_id'];
+                $new_copy = new Copy($books_id, $id);
+                array_push($copies, $new_copy);
+            }
+            return $copies;
+        }
+
+        function addCopy($new_copy)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (copies_id, patrons_id) VALUES ({$new_copy->getId()},{$this->getId()});");
+        }
+
     }
 ?>

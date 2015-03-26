@@ -158,5 +158,51 @@
 
         }
 
+        function test_getCopies()
+        {
+            //Arrange
+            $p_name = "Timmy McGibblets";
+            $new_patron = new Patron($p_name);
+            $new_patron->save();
+
+            $books_id = 34;
+            $new_copy = new Copy($books_id);
+            $new_copy->save();
+
+            $books_id2 = 234;
+            $new_copy2 = new Copy($books_id2);
+            $new_copy2->save();
+
+            //Act
+            $new_patron->addCopy($new_copy);
+            $new_patron->addCopy($new_copy2);
+
+            //Assert
+            $result = $new_patron->getCopies();
+            $this->assertEquals([$new_copy, $new_copy2], $result);
+        }
+
+        function test_addCopy()
+        {
+            //Arrange
+            $p_name = "Timmy McGibblets";
+            $new_patron = new Patron($p_name);
+            $new_patron->save();
+
+            $books_id = 34;
+            $new_copy = new Copy($books_id);
+            $new_copy->save();
+
+            //Act
+            $new_patron->addCopy($new_copy);
+
+            //Assert
+            $result = $new_patron->getCopies();
+            $this->assertEquals([$new_copy], $result);
+        }
+
+
+
+
     }
 ?>
