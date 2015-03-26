@@ -7,32 +7,32 @@
         private $books_id;
         private $due_date;
 
-        function __construct($patrons_id = null, $id = null, $books_id = null, $due_date = "2015/01/01")
+        function __construct($books_id = null, $due_date, $patrons_id = null, $id = null)
         {
-            $this->patrons_id = $patrons_id;
-            $this->id = $id;
             $this->books_id = $books_id;
             $this->due_date = $due_date;
+            $this->patrons_id = $patrons_id;
+            $this->id = $id;
         }
 
         function setPatronsId($new_patrons_id)
         {
-            $this->patrons_id = $new_patrons_id;
+            $this->patrons_id = (int) $new_patrons_id;
         }
 
         function setId($new_id)
         {
-            $this->id = $new_id;
+            $this->id = (int) $new_id;
         }
 
         function setBooksId($new_books_id)
         {
-            $this->books_id = $new_books_id;
+            $this->books_id = (int) $new_books_id;
         }
 
         function setDueDate($new_due_date)
         {
-            $this->due_date = $new_due_date;
+            $this->due_date = (string) $new_due_date;
         }
 
         function getPatronsId()
@@ -71,7 +71,7 @@
                 $id = $checkout['id'];
                 $due_date = $checkout['due_date'];
                 $patrons_id = $checkout['patrons_id'];
-                $new_checkout = new Checkout($books_id, $id, $due_date, $patrons_id);
+                $new_checkout = new Checkout($books_id, $due_date, $patrons_id, $id);
                 array_push ($returned_checkouts, $new_checkout);
             }
             return $returned_checkouts;

@@ -57,7 +57,7 @@
             $id = 4;
             $due_date = "01/01/2015";
             $patrons_id = 1;
-            $test_checkout = new Checkout($books_id, $id, $due_date, $patrons_id);
+            $test_checkout = new Checkout($books_id, $due_date, $patrons_id, $id);
 
             //Act
             $result = $test_checkout->getId();
@@ -73,7 +73,7 @@
             $id = null;
             $due_date = "01/01/2015";
             $patrons_id = 1;
-            $test_checkout = new Checkout($books_id, $id, $due_date, $patrons_id);
+            $test_checkout = new Checkout($books_id, $due_date, $patrons_id, $id);
 
             //Act
             $test_checkout->setId(5);
@@ -108,8 +108,8 @@
             $patrons_id = 1;
             $due_date2 = "02/02/2012";
             $patrons_id2 = 4;
-            $test_checkout = new Checkout($books_id);
-            $test_checkout2 = new Checkout($books_id2);
+            $test_checkout = new Checkout($books_id, $due_date, $patrons_id);
+            $test_checkout2 = new Checkout($books_id2, $due_date2, $patrons_id2);
             $test_checkout->save();
             $test_checkout2->save();
 
@@ -129,8 +129,8 @@
             $patrons_id = 1;
             $due_date2 = "02/02/2012";
             $patrons_id2 = 4;
-            $test_checkout = new Checkout($books_id);
-            $test_checkout2 = new Checkout($books_id2);
+            $test_checkout = new Checkout($books_id, $due_date, $patrons_id);
+            $test_checkout2 = new Checkout($books_id2, $due_date2, $patrons_id2);
             $test_checkout->save();
             $test_checkout2->save();
 
@@ -145,29 +145,31 @@
         function test_update()
         {
             $books_id = 1;
-            $test_checkout = new Checkout($books_id);
+            $due_date = "01/01/2015";
+            $patrons_id = 1;
+            $test_checkout = new Checkout($books_id, $due_date, $patrons_id);
             $test_checkout->save();
-            $new_books_id = 2;
+            $new_due_date = "02/31/2015";
 
             //Act
-            $test_checkout->update($new_books_id);
+            $test_checkout->update($new_due_date);
 
             //Assert
-            $result = $test_checkout->getBooksId();
-            $this->assertEquals($new_books_id, $result);
+            $result = $test_checkout->getDueDate();
+            $this->assertEquals($new_due_date, $result);
         }
 
         function test_delete()
         {
             //Arrange
             $books_id = 1;
-            $books_id2 = 2;
             $due_date = "01/01/2015";
             $patrons_id = 1;
+            $books_id2 = 2;
             $due_date2 = "02/02/2012";
             $patrons_id2 = 4;
-            $test_checkout = new Checkout($books_id);
-            $test_checkout2 = new Checkout($books_id2);
+            $test_checkout = new Checkout($books_id, $due_date, $patrons_id);
+            $test_checkout2 = new Checkout($books_id2, $due_date2, $patrons_id2);
             $test_checkout->save();
             $test_checkout2->save();
 
