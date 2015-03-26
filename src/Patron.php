@@ -100,6 +100,5 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO checkouts (copies_id, patrons_id) VALUES ({$new_copy->getId()},{$this->getId()});");
         }
-
     }
 ?>

@@ -157,5 +157,48 @@
             $this->assertEquals([$test_copy2], $result);
 
         }
+
+        function test_getPatrons()
+        {
+            //Arrange
+            $books_id = 34;
+            $new_copy = new Copy($books_id);
+            $new_copy->save();
+
+            $p_name = "Timmy McGibblets";
+            $new_patron = new Patron($p_name);
+            $new_patron->save();
+
+            $p_name2 = "Jimmy Neutron";
+            $new_patron2 = new Patron($p_name2);
+            $new_patron2->save();
+
+            //Act
+            $new_copy->addPatron($new_patron);
+            var_dump($new_copy);
+            $new_copy->addPatron($new_patron2);
+
+            //Assert
+            $result = $new_copy->getPatrons();
+            $this->assertEquals([$new_patron, $new_patron2], $result);
+        }
+
+        function test_addPatron()
+        {
+            $books_id = 34;
+            $new_copy = new Copy($books_id);
+            $new_copy->save();
+
+            $p_name = "Timmy McGibblets";
+            $new_patron = new Patron($p_name);
+            $new_patron->save();
+
+            //Act
+            $new_copy->addPatron($new_patron);
+
+            //Assert
+            $result = $new_copy->getPatrons();
+            $this->assertEquals([$new_patron], $result);
+        }
     }
 ?>
