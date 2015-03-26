@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Springfield Library</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+    <div class="container">
+        <h1>Springfield Library</h1>
+
+        <form action="/authors" method="post">
+            <label for="name">Add an Author:</label>
+            <input id="name" name="name" type="text" placeholder="Last Name, First Name">
+            <button type="submit" class="btn btn-success">Add</button>
+        </form>
+
+        <form action="/admin">
+            <button type="submit" class="btn btn-info">Back</button>
+        </form>
+
+
+
+        <h2>Author Catalog:</h2>
+        {% if authors is not empty %}
+        <ol>
+            {% for author in authors|sort %}
+            <li><a href="/authors/{{ author.getId }}">{{ author.getName }}</a></li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p>There are no Authors</p>
+        {% endif %}
+    </div>
+
+
+
+
+
+
+</body>
+</html>

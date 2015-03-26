@@ -56,6 +56,18 @@
             $GLOBALS['DB']->exec("DELETE FROM authors *;");
         }
 
+        static function find($search_id)
+        {
+            $all_authors = Author::getAll();
+            $found_author = null;
+            foreach($all_authors as $author){
+                if ($author->getId() == $search_id){
+                    $found_author = $author;
+                }
+            }
+            return $found_author;
+        }
+
         function update($new_name)
         {
             $GLOBALS['DB']->exec("UPDATE authors SET name = '{$new_name}' WHERE id = {$this->getId()};");

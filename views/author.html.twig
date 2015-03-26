@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>{{ author.getName }}</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+    <div class="container">
+        <h1>Springfield Library</h1>
+
+        <h3>{{ author.getName }}</h3>
+        <form action="/authors/{{ author.getId }}/edit">
+            <button type="submit" class="btn btn-warning">Edit this author</button>
+        </form>
+
+        <br>
+
+        <form action="/add_books" method="post">
+                <label for="book_id">Select a book</label>
+                <input value="{{ author.getId }}" id="author_id" name="author_id" type="hidden">
+                <select id="book_id" name="book_id" type="text">
+                    {% for book in all_books %}
+                        <option value="{{ book.getId }}"> {{ book.getTitle }} </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Add Book</button>
+            </form>
+
+        <p>Books written by this author:</p>
+        {% if books is not empty %}
+        <ol>
+            {% for book in books|sort %}
+            <li><a href="/books/{{ book.getId }}">{{ book.getTitle }}</a></li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p>There are no books by this author.</p>
+        {% endif %}
+
+
+        <form action="/authors">
+            <button type="submit" class="btn btn-info">Back to list of authors</button>
+        </form>
+        <br>
+
+        <form action="/authors/{{ author.getId }}/delete" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit" class="btn btn-danger">Remove Author</button>
+        </form>
+
+    </div>
+</body>
+</html>
