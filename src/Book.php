@@ -118,5 +118,18 @@ class Book
             return $returned_copies;
         }
 
+        function addCopy()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO copies (books_id) VALUES ('{$this->getBooksId()}') RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($result['id']);
+        }
+
+        function deleteCopy($copy)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = ({$copy->getId()});");
+        }
+
+
     }
 ?>

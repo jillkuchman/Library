@@ -221,6 +221,29 @@
             $this->assertEquals([$test_author1], $result);
 
         }
+
+        function test_addCopy()
+        {
+            //Arrange
+            $title = "How to Water Your Succulents on Venus";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            // $books_id = null;
+            // $test_copy = new Copy($books_id);
+            // $test_copy->save();
+
+
+            //Act
+            $test_book->addCopy();
+
+
+            //Assert
+            $result = $test_book->getCopies();
+            $this->assertEquals([$test_copy], $result);
+
+        }
+
     }
 
 

@@ -165,7 +165,41 @@
     });
 
 
-    return $app;
+/////-----------------------------------------------////////
+
+    //COPIES PAGES
+
+    $app->get("/copies/{id}", function($id) use ($app) {
+        $current_book = Book::find($id);
+        return $app['twig']->render('copies.html.twig', array('book' => $current_book, 'copies' => $current_book->getCopies()));
+    });
+
+    $app->post("/add_copy", function() use ($app) {
+        $current_book = Book::find($_POST['book_id']);
+        $book_id = $current_book->getId();
+        $new_copy = new Copy($book_id);
+        $new_copy->save();
+        return $app['twig']->render('copies.html.twig', array('book' => $current_book, 'copies' => $current_book->getCopies()));
+    });
+
+    $app->delete("/delete_copies", function() use($app) {
+        $current_book = Book::find($_POST['book_id']);
+        $copy = Copy::find($_POST['copy_id']);
+        $current_book->deleteCopy($copy);
+        return $app['twig']->render('copies.html.twig', array('book' => $current_book, 'copies' => $current_book->getCopies()));
+    });
+
+
+
+
+
+
+
+
+
+
+return $app;
+
 
 
 

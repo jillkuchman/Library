@@ -38,6 +38,7 @@
             $this->setId($result['id']);
         }
 
+
         static function getAll()
         {
             $all_copies = $GLOBALS['DB']->query("SELECT * FROM copies;");

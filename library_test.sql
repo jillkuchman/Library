@@ -135,9 +135,9 @@ ALTER SEQUENCE books_id_seq OWNED BY books.id;
 
 CREATE TABLE checkouts (
     id integer NOT NULL,
-    books_id integer,
     due_date character varying,
-    patrons_id integer
+    patrons_id integer,
+    copies_id integer
 );
 
 
@@ -277,9 +277,9 @@ ALTER TABLE ONLY patrons ALTER COLUMN id SET DEFAULT nextval('patrons_id_seq'::r
 --
 
 COPY authors (id, name) FROM stdin;
-232	John Franti
-233	David Bowie
-234	John Franti
+200	John Franti
+201	David Bowie
+202	John Franti
 \.
 
 
@@ -339,63 +339,52 @@ COPY authors_books (id, authors_id, books_id) FROM stdin;
 49	113	121
 50	113	122
 51	114	123
-52	115	134
-53	116	134
-54	117	135
-55	126	136
-56	126	137
+53	115	125
+54	116	136
+55	117	136
+56	118	137
 57	127	138
-58	128	149
-59	129	149
-60	130	150
-61	139	151
-62	139	152
-63	140	153
-64	141	164
-65	142	164
-66	143	165
-67	152	166
-68	152	167
-69	153	168
-70	154	179
-71	155	179
-72	156	180
-73	165	181
-74	165	182
-75	166	183
-76	167	194
-77	168	194
-78	169	195
-79	178	196
-80	178	197
-81	179	198
-82	180	209
-83	181	209
-84	182	210
-85	191	211
-86	191	212
-87	192	213
-88	193	224
-89	194	224
-90	195	225
-91	204	226
-92	204	227
-93	205	228
-94	206	239
-95	207	239
-96	208	240
-97	217	241
-98	217	242
-99	218	243
-100	219	254
-101	220	254
-102	221	255
-103	230	256
-104	230	257
-105	231	258
-106	232	269
-107	233	269
-108	234	270
+58	127	139
+59	128	140
+61	129	142
+62	130	153
+63	131	153
+64	132	154
+65	141	156
+66	141	157
+67	142	158
+69	143	160
+70	144	171
+71	145	171
+72	146	172
+73	155	174
+74	155	175
+75	156	176
+77	157	178
+78	158	189
+79	159	189
+80	160	190
+81	169	192
+82	169	193
+83	170	194
+85	171	196
+86	172	207
+87	173	207
+88	174	208
+89	183	210
+90	183	211
+91	184	212
+93	185	214
+94	186	225
+95	187	225
+96	188	226
+97	197	228
+98	197	229
+99	198	230
+101	199	232
+102	200	243
+103	201	243
+104	202	244
 \.
 
 
@@ -403,14 +392,14 @@ COPY authors_books (id, authors_id, books_id) FROM stdin;
 -- Name: authors_books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('authors_books_id_seq', 108, true);
+SELECT pg_catalog.setval('authors_books_id_seq', 104, true);
 
 
 --
 -- Name: authors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('authors_id_seq', 234, true);
+SELECT pg_catalog.setval('authors_id_seq', 202, true);
 
 
 --
@@ -418,6 +407,7 @@ SELECT pg_catalog.setval('authors_id_seq', 234, true);
 --
 
 COPY books (id, title) FROM stdin;
+245	How to Water Your Succulents on Venus
 \.
 
 
@@ -425,14 +415,20 @@ COPY books (id, title) FROM stdin;
 -- Name: books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('books_id_seq', 270, true);
+SELECT pg_catalog.setval('books_id_seq', 245, true);
 
 
 --
 -- Data for Name: checkouts; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY checkouts (id, books_id, due_date, patrons_id) FROM stdin;
+COPY checkouts (id, due_date, patrons_id, copies_id) FROM stdin;
+139	\N	136	150
+140	\N	137	150
+141	\N	138	151
+142	\N	147	152
+143	\N	147	153
+144	\N	148	154
 \.
 
 
@@ -440,7 +436,7 @@ COPY checkouts (id, books_id, due_date, patrons_id) FROM stdin;
 -- Name: checkouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('checkouts_id_seq', 89, true);
+SELECT pg_catalog.setval('checkouts_id_seq', 144, true);
 
 
 --
@@ -448,6 +444,9 @@ SELECT pg_catalog.setval('checkouts_id_seq', 89, true);
 --
 
 COPY copies (id, books_id) FROM stdin;
+152	34
+153	234
+154	34
 \.
 
 
@@ -455,7 +454,7 @@ COPY copies (id, books_id) FROM stdin;
 -- Name: copies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('copies_id_seq', 104, true);
+SELECT pg_catalog.setval('copies_id_seq', 154, true);
 
 
 --
@@ -470,7 +469,7 @@ COPY patrons (id, p_name) FROM stdin;
 -- Name: patrons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('patrons_id_seq', 104, true);
+SELECT pg_catalog.setval('patrons_id_seq', 148, true);
 
 
 --

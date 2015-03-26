@@ -135,9 +135,9 @@ ALTER SEQUENCE books_id_seq OWNED BY books.id;
 
 CREATE TABLE checkouts (
     id integer NOT NULL,
-    books_id integer,
     due_date character varying,
-    patrons_id integer
+    patrons_id integer,
+    copies_id integer
 );
 
 
@@ -277,6 +277,9 @@ ALTER TABLE ONLY patrons ALTER COLUMN id SET DEFAULT nextval('patrons_id_seq'::r
 --
 
 COPY authors (id, name) FROM stdin;
+5	Clancy, Tom
+6	Crichton, Michael
+7	Rowling, J.K.
 \.
 
 
@@ -285,6 +288,13 @@ COPY authors (id, name) FROM stdin;
 --
 
 COPY authors_books (id, authors_id, books_id) FROM stdin;
+1	1	2
+3	4	1
+5	4	3
+6	1	1
+7	5	4
+8	7	6
+9	6	5
 \.
 
 
@@ -292,14 +302,14 @@ COPY authors_books (id, authors_id, books_id) FROM stdin;
 -- Name: authors_books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('authors_books_id_seq', 1, false);
+SELECT pg_catalog.setval('authors_books_id_seq', 9, true);
 
 
 --
 -- Name: authors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('authors_id_seq', 1, false);
+SELECT pg_catalog.setval('authors_id_seq', 7, true);
 
 
 --
@@ -307,6 +317,9 @@ SELECT pg_catalog.setval('authors_id_seq', 1, false);
 --
 
 COPY books (id, title) FROM stdin;
+4	The Hunt for Red October
+5	Jurassic Park
+6	Harry Potter and the Wizard Thing
 \.
 
 
@@ -314,14 +327,14 @@ COPY books (id, title) FROM stdin;
 -- Name: books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('books_id_seq', 1, false);
+SELECT pg_catalog.setval('books_id_seq', 6, true);
 
 
 --
 -- Data for Name: checkouts; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY checkouts (id, books_id, due_date, patrons_id) FROM stdin;
+COPY checkouts (id, due_date, patrons_id, copies_id) FROM stdin;
 \.
 
 
@@ -337,6 +350,14 @@ SELECT pg_catalog.setval('checkouts_id_seq', 1, false);
 --
 
 COPY copies (id, books_id) FROM stdin;
+1	6
+2	6
+3	6
+4	6
+5	6
+6	6
+7	6
+8	6
 \.
 
 
@@ -344,7 +365,7 @@ COPY copies (id, books_id) FROM stdin;
 -- Name: copies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('copies_id_seq', 1, false);
+SELECT pg_catalog.setval('copies_id_seq', 8, true);
 
 
 --
