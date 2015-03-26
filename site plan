@@ -37,7 +37,7 @@
         <type label="SET" length="1" sql="SET" quote=""/>
         <type label="Bit" length="0" sql="bit" quote=""/>
     </group>
-</datatypes><table x="338" y="357" name="books">
+</datatypes><table x="361" y="23" name="books">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -48,7 +48,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="59" y="138" name="authors">
+<table x="58" y="316" name="authors">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -59,7 +59,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="747" y="132" name="patrons">
+<table x="844" y="321" name="patrons">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -70,7 +70,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="534" y="215" name="checkouts">
+<table x="651" y="228" name="checkouts">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -78,9 +78,9 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="patrons" row="id" />
 </row>
-<row name="books_id" null="1" autoincrement="0">
+<row name="copies_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="books" row="id" />
+<default>NULL</default><relation table="copies" row="id" />
 </row>
 <row name="due_date" null="1" autoincrement="0">
 <datatype>DATE</datatype>
@@ -89,7 +89,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="123" y="262" name="authors_books">
+<table x="129" y="162" name="authors_books">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -105,7 +105,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="533" y="497" name="copies">
+<table x="497" y="163" name="copies">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>

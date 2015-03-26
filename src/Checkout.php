@@ -4,12 +4,12 @@
     {
         private $patrons_id;
         private $id;
-        private $books_id;
+        private $copies_id;
         private $due_date;
 
-        function __construct($books_id = null, $due_date, $patrons_id = null, $id = null)
+        function __construct($copies_id = null, $due_date, $patrons_id = null, $id = null)
         {
-            $this->books_id = $books_id;
+            $this->copies_id = $copies_id;
             $this->due_date = $due_date;
             $this->patrons_id = $patrons_id;
             $this->id = $id;
@@ -25,9 +25,9 @@
             $this->id = (int) $new_id;
         }
 
-        function setBooksId($new_books_id)
+        function setCopiesId($new_copies_id)
         {
-            $this->books_id = (int) $new_books_id;
+            $this->copies_id = (int) $new_copies_id;
         }
 
         function setDueDate($new_due_date)
@@ -45,9 +45,9 @@
             return $this->id;
         }
 
-        function getBooksId()
+        function getCopiesId()
         {
-            return $this->books_id;
+            return $this->copies_id;
         }
 
         function getDueDate()
@@ -57,7 +57,7 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO checkouts (books_id, due_date, patrons_id) VALUES ({$this->getBooksId()}, '{$this->getDueDate()}', {$this->getPatronsId()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO checkouts (copies_id, due_date, patrons_id) VALUES ({$this->getCopiesId()}, '{$this->getDueDate()}', {$this->getPatronsId()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
@@ -67,11 +67,11 @@
             $all_checkouts = $GLOBALS['DB']->query("SELECT * FROM checkouts;");
             $returned_checkouts = array();
             foreach ($all_checkouts as $checkout){
-                $books_id = $checkout['books_id'];
+                $copies_id = $checkout['copies_id'];
                 $id = $checkout['id'];
                 $due_date = $checkout['due_date'];
                 $patrons_id = $checkout['patrons_id'];
-                $new_checkout = new Checkout($books_id, $due_date, $patrons_id, $id);
+                $new_checkout = new Checkout($copies_id, $due_date, $patrons_id, $id);
                 array_push ($returned_checkouts, $new_checkout);
             }
             return $returned_checkouts;
