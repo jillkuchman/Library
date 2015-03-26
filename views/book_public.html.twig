@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>{{ book.getTitle }}</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+    <div class="container">
+        <h4>Springfield Library</h4>
+
+        <h3>{{ book.getTitle }}</h3>
+
+        <br>
+
+        <p>Author(s) of this book:</p>
+        {% if authors is not empty %}
+        <ol>
+            {% for author in authors|sort %}
+            <li><a href="/authors_public/{{ author.getId }}">{{ author.getName }}</a></li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p>There are no listed authors for this book.</p>
+        {% endif %}
+
+
+        <form action="/books_public">
+            <button type="submit" class="btn btn-info">Back to catalog</button>
+        </form>
+        <br>
+
+        <!-- <form action="/books/{{ book.getId }}/delete" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit" class="btn btn-danger">CHECK THIS BOOK OUT</button>
+        </form> -->
+
+    </div>
+</body>
+</html>

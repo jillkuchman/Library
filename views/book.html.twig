@@ -14,16 +14,6 @@
 
         <br>
 
-        <form action="/add_authors" method="post">
-                <label for="author_id">Select an author</label>
-                <input value="{{ book.getId }}" id="book_id" name="book_id" type="hidden">
-                <select id="author_id" name="author_id" type="text">
-                    {% for author in all_authors %}
-                        <option value="{{ author.getId }}"> {{ author.getName }} </option>
-                    {% endfor %}
-                </select>
-                <button type="submit">Add Author</button>
-            </form>
 
         <p>Author(s) of this book:</p>
         {% if authors is not empty %}
@@ -35,6 +25,18 @@
         {% else %}
             <p>There are no listed authors for this book.</p>
         {% endif %}
+
+        <form action="/add_authors" method="post">
+                <label for="author_id">Select an author</label>
+                <input value="{{ book.getId }}" id="book_id" name="book_id" type="hidden">
+                <select id="author_id" name="author_id" type="text">
+                    {% for author in all_authors %}
+                        <option value="{{ author.getId }}"> {{ author.getName }} </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Add Author</button>
+            </form>
+
 
 
         <form action="/books">

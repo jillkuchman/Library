@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Springfield Library</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+    <div class="container">
+        <h4>Springfield Library</h4>
+
+        <form action="/public">
+            <button type="submit" class="btn btn-info">Back</button>
+        </form>
+
+        <h2>Book Catalog:</h2>
+        {% if books is not empty %}
+        <ol>
+            {% for book in books|sort %}
+            <li><a href="/books_public/{{ book.getId }}">{{ book.getTitle }}</a></li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p>There are no Books</p>
+        {% endif %}
+
+
+    </div>
+</body>
+</html>
