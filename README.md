@@ -15,9 +15,11 @@ This Library app will allow an Admin to create a list books and authors, and wil
 To use the app, download the source code and run it in on your php server.
 Run your PHP server from the <strong>web</strong> folder.
 You will need to create a psql database using the following commands:
-CREATE DATABASE library;
-\c library
-\i library.sql
+<ol>
+<li>CREATE DATABASE library;</li>
+<li>\c library</li>
+<li>\i library.sql</li>
+</ol>
 
 To edit the app, download the source code and open it in your text editor. <br />
     *Note: If you are copying any of the code to your own directories, you may need to install Composer
