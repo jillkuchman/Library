@@ -7,6 +7,7 @@
     <div class="container">
         <h4>Springfield Library</h4>
         <h3>{{ author.getName }}</h3>
+        
         <form action="/authors/{{ author.getId }}" method="post">
             <input name="_method" type="hidden" value="patch">
             <label for="new_name">Edit Author Name:</label>
@@ -17,10 +18,6 @@
         <form action="/authors/{{ author.getId }}">
             <button type="submit" class="btn btn-info">Back to {{ author.getName }}</button>
         </form>
-
-
-
-
     </div>
 </body>
 </html>

@@ -25,6 +25,20 @@ To edit the app, download the source code and open it in your text editor. <br /
     *Note: If you are copying any of the code to your own directories, you may need to install Composer
     in your root directory*
 
+####Technologies Used
+<ul>
+<li>HTML5</li>
+<li>CSS3</li>
+<li>Bootstrap</li>
+<li>PHP ver 5.5.6</li>
+<li>PSQL ver 9.4.1</li>
+<li>Silex ver 1.1</li>
+<li>Twig ver 1.0</li>
+<li>PHPUnit ver 4.5</li>
+</ul>
+
+Simpsons librarian image source: http://www.wearysloth.com/Gallery/ActorsR/tve15008-19980920-696.jpg
+
 ####Copyright (c) 2015 Jill Kuchman & John Franti
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

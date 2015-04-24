@@ -31,9 +31,6 @@
         return $app['twig']->render('public.html.twig');
     });
 
-
-//
-//
     //BOOKS PAGE, list of books with links to each book.
 
     $app->get("/books", function() use ($app) {
@@ -165,8 +162,6 @@
     });
 
 
-/////-----------------------------------------------////////
-
     //COPIES PAGES
 
     $app->get("/copies/{id}", function($id) use ($app) {
@@ -188,20 +183,5 @@
         $current_book->deleteCopy($copy);
         return $app['twig']->render('copies.html.twig', array('book' => $current_book, 'copies' => $current_book->getCopies()));
     });
-
-
-
-
-
-
-
-
-
-
 return $app;
-
-
-
-
-
 ?>

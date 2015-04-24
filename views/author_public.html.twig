@@ -11,11 +11,8 @@
             <button type="submit" class="btn btn-info">Back to list of authors</button>
         </form>
 
-
         <h3>{{ author.getName }}</h3>
-
         <br>
-
         <p>Books written by this author:</p>
         {% if books is not empty %}
         <ol>
@@ -26,10 +23,7 @@
         {% else %}
             <p>There are no books by this author.</p>
         {% endif %}
-
-
         <br>
-
     </div>
 </body>
 </html>
