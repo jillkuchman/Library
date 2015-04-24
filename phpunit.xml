@@ -1,3 +1,4 @@
+//this file adds style to phpunit tests
 <phpunit colors="true">
   <testsuites>
     <testsuite name="tests">
